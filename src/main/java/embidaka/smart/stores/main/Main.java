@@ -14,10 +14,12 @@ import java.sql.Connection;
  */
 public class Main {
     public static void main(String[] args){
-        try{
+        try
+        {
             Connection c = UtilDB.getConnection();
+            System.out.println("embidaka.smart.stores.main.Main.main()");
         }catch(Exception ex){
-            System.out.println("exception "+ex.getMessage());
+            ex.printStackTrace();
         }
     }
 }
