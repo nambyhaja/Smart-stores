@@ -18,6 +18,7 @@ public class Main {
         {
             Connection c = UtilDB.getConnection();
             System.out.println("embidaka.smart.stores.main.Main.main()");
+            System.out.println(c);
         }catch(Exception ex){
             ex.printStackTrace();
         }
