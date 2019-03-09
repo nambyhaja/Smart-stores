@@ -5,7 +5,9 @@
  */
 package embidaka.smart.stores.main;
 
+import com.google.gson.Gson;
 import embidaka.smart.stores.database.UtilDB;
+import embidaka.smart.stores.models.Livreur;
 import java.sql.Connection;
 
 /**
@@ -16,9 +18,7 @@ public class Main {
     public static void main(String[] args){
         try
         {
-            Connection c = UtilDB.getConnection();
-            System.out.println("embidaka.smart.stores.main.Main.main()");
-            System.out.println(c);
+            
         }catch(Exception ex){
             ex.printStackTrace();
         }
