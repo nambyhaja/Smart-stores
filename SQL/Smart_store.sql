@@ -6,7 +6,7 @@ create table BC (
    IDBC                 INT4                 not null,
    IDCLIENT             INT4                 not null,
    DATECOMMANDE         DATE                 null,
-   UID                  VARCHAR(50)          null,
+   UIDBC                  VARCHAR(50)          null,
    constraint PK_BC primary key (IDBC)
 );
 
@@ -174,7 +174,7 @@ create table PRIX (
    IDPRIX               INT4                 not null,
    IDPRODUIT            INT4                 not null,
    PRIXUNITAIRE         NUMERIC              null,
-   DATE                 DATE                 null,
+   DATEPRIX                 DATE                 null,
    constraint PK_PRIX primary key (IDPRIX)
 );
 

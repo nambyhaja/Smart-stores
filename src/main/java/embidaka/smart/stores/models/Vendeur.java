@@ -9,24 +9,23 @@ import embidaka.smart.store.dao.BaseModel;
 
 /**
  *
- * @author nambi
+ * @author aramanam
  */
-public final class Livreur extends BaseModel{
-    
+public final class Vendeur extends BaseModel{
+
     private String nom;
-    private String prenom;
+    private String prenon;
     private String login;
     private String motDePasse;
 
-    private Livreur() {
+    public Vendeur() {
     }
 
-    public Livreur(String nom, String prenom, String login, String motDePasse) {
-      
+    public Vendeur(String nom, String prenon, String login, String motDePasse) {
         this.setNom(nom); 
-        this.setPrenom(prenom);
-        this.setLogin(login);
-        this.setMotDePasse(motDePasse); 
+        this.setPrenon(prenon); 
+        this.setLogin(login); 
+        this.setMotDePasse(motDePasse);
     }
 
     public String getNom() {
@@ -37,12 +36,12 @@ public final class Livreur extends BaseModel{
         this.nom = nom;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public String getPrenon() {
+        return prenon;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setPrenon(String prenon) {
+        this.prenon = prenon;
     }
 
     public String getLogin() {
@@ -63,8 +62,8 @@ public final class Livreur extends BaseModel{
 
     @Override
     public BaseModel getInstance() {
-        return new Livreur();
+        return new Vendeur();
     }
-    
+
     
 }
