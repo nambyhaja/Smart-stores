@@ -6,57 +6,40 @@
 package embidaka.smart.stores.service;
 
 import com.google.gson.Gson;
-import embidaka.smart.stores.models.Categorie;
 import embidaka.smart.stores.models.Livreur;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
  
 
 @Path("/produits")
-public class ProductService {
- 
-	@GET
-        @Produces({"application/json"})
-	@Path("/{param}")
-	public Response getMsg(@PathParam("param") String msg) {
-                
-                
-                Livreur  lv = new Livreur();
-            lv.setIdLivreur(1);
-            lv.setNom("anarana");
-            lv.setPrenom("8787");
-            lv.setLogin("login");
-            lv.setMotDePasse("mdp");
-            lv.categorie = new Categorie();
-            lv.categorie.setDesignation("zefzefzefzef");
-            lv.categorie.setIdCategorie(1);
-            Gson gson = new Gson();
-            String jsonInString = gson.toJson(lv);
-		return Response.status(200).entity(jsonInString).build();
- 
-	}
-        
-        @GET
-	@Path("/{param}")
-	public Response getMsg(@PathParam("param") String msg) {
-                
-                
-                Livreur  lv = new Livreur();
-            lv.setIdLivreur(1);
-            lv.setNom("anarana");
-            lv.setPrenom("8787");
-            lv.setLogin("login");
-            lv.setMotDePasse("mdp");
-            lv.categorie = new Categorie();
-            lv.categorie.setDesignation("zefzefzefzef");
-            lv.categorie.setIdCategorie(1);
-            Gson gson = new Gson();
-            String jsonInString = gson.toJson(lv);
-		return Response.status(200).entity(jsonInString).build();
- 
-	}
- 
+public class ProductService 
+{
+    @GET
+    @Produces({"application/json"})
+    @Path("/{param}")
+    public Response getMsg(@PathParam("param") String msg) 
+    {
+            Livreur  lv = new Livreur("nom", "prenom", "login", "mdp");
+        Gson gson = new Gson();
+        String jsonInString = gson.toJson(lv);
+            return Response.status(200).entity(jsonInString).build();
+
+    }
+
+    @POST
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Path("/inscription")
+    public Response inscription(Livreur livreur) 
+    {
+        Gson gson = new Gson();
+        String jsonInString = gson.toJson(livreur);
+        return Response.status(200).entity(jsonInString).build();
+    }
 }

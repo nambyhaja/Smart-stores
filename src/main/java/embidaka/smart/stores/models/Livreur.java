@@ -5,17 +5,28 @@
  */
 package embidaka.smart.stores.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import embidaka.smart.store.dao.BaseModel;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author nambi
  */
+@XmlRootElement(name = "livreur")
 public final class Livreur extends BaseModel{
-    
+    @JsonProperty("nom")
     private String nom;
+    
+    @JsonProperty("prenom")
     private String prenom;
+    
+    @JsonProperty("login")
     private String login;
+    
+    @JsonProperty("motDePasse")
     private String motDePasse;
 
     private Livreur() {
@@ -44,7 +55,9 @@ public final class Livreur extends BaseModel{
     public void setNom(String nom) {
         this.nom = nom;
     }
-
+    
+    @Basic
+    @Column(name = "prenom")
     public String getPrenom() {
         return prenom;
     }
@@ -53,6 +66,8 @@ public final class Livreur extends BaseModel{
         this.prenom = prenom;
     }
 
+    @Basic
+    @Column(name = "login")
     public String getLogin() {
         return login;
     }
@@ -61,6 +76,8 @@ public final class Livreur extends BaseModel{
         this.login = login;
     }
 
+    @Basic
+    @Column(name = "motDePasse")
     public String getMotDePasse() {
         return motDePasse;
     }
