@@ -7,6 +7,7 @@ package embidaka.smart.stores.service;
 
 import com.google.gson.Gson;
 import embidaka.smart.stores.models.Livreur;
+import embidaka.smart.stores.models.Produit;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -41,5 +42,26 @@ public class ProductService
         Gson gson = new Gson();
         String jsonInString = gson.toJson(livreur);
         return Response.status(200).entity(jsonInString).build();
+    }
+    
+    //Example POST
+    @POST
+    @Path("/insert")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response post(String p) {
+
+        Gson gson = new Gson();
+        Produit produit = gson.fromJson(p, Produit.class);
+        /*
+        private Categorie categorie;
+        private String code;
+        private String designation;
+        private String description;
+        private String uid;
+        private String photo;
+        private double prix;
+        private double tva;
+        */
+        return Response.status(200).entity("Object : " + produit.getCategorie().getDesignation()).build();
     }
 }
