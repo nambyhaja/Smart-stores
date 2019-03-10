@@ -91,9 +91,9 @@ public final class Client extends BaseModel {
 
     public void setMotDePasse(String motDePasse) throws Exception {
         if(!motDePasse.isEmpty()){
-            this.motDePasse = UtilServices.hashing(motDePasse);
+            this.motDePasse = motDePasse;
         }else{
-            throw new Exception("Erreur lors de la tentative d'insertion du mot de passe ...");
+            throw new Exception("Erreur : Mot de passe null ou vide  ...");
         }
         
     }

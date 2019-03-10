@@ -52,6 +52,7 @@ public class ProductService
 
         Gson gson = new Gson();
         Produit produit = gson.fromJson(p, Produit.class);
+        String jsonInString = gson.toJson(produit);
         /*
         private Categorie categorie;
         private String code;
@@ -62,6 +63,6 @@ public class ProductService
         private double prix;
         private double tva;
         */
-        return Response.status(200).entity("Object : " + produit.getCategorie().getDesignation()).build();
+        return Response.status(200).entity(jsonInString).build();
     }
 }
