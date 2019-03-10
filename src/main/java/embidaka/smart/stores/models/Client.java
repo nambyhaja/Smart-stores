@@ -6,6 +6,7 @@
 package embidaka.smart.stores.models;
 
 import embidaka.smart.store.dao.BaseModel;
+import embidaka.smart.stores.service.UtilServices;
 
 /**
  *
@@ -21,14 +22,14 @@ public final class Client extends BaseModel {
     public Client() {
     }
 
-    public Client(String nom, String prenom, String login, String motDePasse) {
+    public Client(String nom, String prenom, String login, String motDePasse) throws Exception {
 
         this.setNom(nom);
         this.setPrenom(prenom);
         this.setLogin(login);
         this.setMotDePasse(motDePasse);
     }
-    public Client(int idClient, String nom, String prenom, String login, String motDePasse) {
+    public Client(int idClient, String nom, String prenom, String login, String motDePasse) throws Exception {
         
         super.setId(idClient);
         this.setNom(nom);
@@ -49,32 +50,52 @@ public final class Client extends BaseModel {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNom(String nom) throws Exception {
+        
+        if(!nom.isEmpty() && nom != null){
+            this.nom = nom;
+        }else{
+            throw new Exception("Erreur : Le nom ne doit pas être vide ");
+        }
     }
 
     public String getPrenom() {
         return prenom;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setPrenom(String prenom) throws Exception {
+        if(!prenom.isEmpty() && prenom != null){
+            this.prenom = prenom;
+        }else{
+            throw new Exception("Erreur : Le prénom ne doit pas être vide ");
+        }
+        
     }
 
     public String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setLogin(String login) throws Exception {
+        if(!login.isEmpty() && login != null){
+            this.login = login;
+        }else{
+            throw new Exception("Erreur : login null ou vide ");
+        }
+        
     }
 
     public String getMotDePasse() {
         return motDePasse;
     }
 
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
+    public void setMotDePasse(String motDePasse) throws Exception {
+        if(!motDePasse.isEmpty()){
+            this.motDePasse = UtilServices.hashing(motDePasse);
+        }else{
+            throw new Exception("Erreur lors de la tentative d'insertion du mot de passe ...");
+        }
+        
     }
 
     public static Client getClient() {

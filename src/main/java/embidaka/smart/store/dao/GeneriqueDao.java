@@ -409,4 +409,63 @@ public class GeneriqueDao {
         System.out.println("ty e out eeeeeee " + out);
         return out;
     }
+    
+    @SuppressWarnings("rawtypes")
+    private ArrayList<BaseModel> findByString(Class<?> mere, Class<?> fille, String where, int id) throws Exception {
+
+        ArrayList<BaseModel> reponse = new ArrayList<>();
+        String name = fille.getSimpleName();
+        String allName = fille.getName();
+
+        String nameMere = mere.getSimpleName();
+
+        Class<?> model = Class.forName(allName);
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet res = null;
+        try {
+
+            String sql = "select * from " + name + " where " + where + " = " + id;
+            conn = UtilDB.getConnection();
+            stmt = conn.prepareStatement(sql);
+            res = stmt.executeQuery();
+            while (res.next()) {
+
+                ArrayList<Object> value = new ArrayList<>();
+                ArrayList<Class> type = new ArrayList<>();
+                ResultSetMetaData rsmd = res.getMetaData();
+                int typeDB = 0;
+                for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+
+                    typeDB = rsmd.getColumnType(i);
+                    Class<?> tempClass = this.getType(typeDB);
+                    type.add(tempClass);
+                    value.add(res.getObject(i));
+                }
+                Class[] types = type.toArray(new Class[type.toArray().length]);
+                Constructor<?> constructor = model.getConstructor(types);
+
+                Object object = constructor.newInstance(value.toArray());
+
+                reponse.add((BaseModel) object);
+            }
+
+        } catch (Exception e) {
+
+            throw e;
+        } finally {
+
+            if (res != null) {
+                res.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return reponse;
+    }
 }
