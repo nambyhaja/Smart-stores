@@ -24,6 +24,13 @@ public final class Facture extends BaseModel {
         this.setIdBc(idBc);
         this.setRemise(remise);
     }
+    
+    public Facture(int idFacture, int idBc, double remise) {
+        
+        super.setId(idBc);
+        this.setIdBc(idBc);
+        this.setRemise(remise);
+    }
 
     public int getIdBc() {
         return idBc;
@@ -40,12 +47,9 @@ public final class Facture extends BaseModel {
     public void setRemise(double remise) {
         this.remise = remise;
     }
-
-    @Override
-    public BaseModel getInstance() {
+    
+    public static Facture getFacture(){
         return new Facture();
     }
-    
-    
 
 }

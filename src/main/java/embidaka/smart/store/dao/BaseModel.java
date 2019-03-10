@@ -1,6 +1,6 @@
 package embidaka.smart.store.dao;
 
-public abstract class BaseModel {
+public class BaseModel {
 
     private int id;
 
@@ -19,5 +19,5 @@ public abstract class BaseModel {
         this.id = id;
     }
     
-    public abstract BaseModel getInstance();
+    
 }

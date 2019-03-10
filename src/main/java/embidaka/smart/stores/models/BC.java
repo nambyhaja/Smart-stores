@@ -27,7 +27,22 @@ public final class BC extends BaseModel {
         this.setDateCommande(DateCommande);
         this.setUidBc(uidBc);
     }
+    
+    public BC(int id, int idClient, Date DateCommande, String uidBc) {
+        
+        super.setId(id);
+        this.setIdClient(idClient);
+        this.setDateCommande(DateCommande);
+        this.setUidBc(uidBc);
+    }
 
+    public int getIdBc() {
+        return super.getId();
+    }
+
+    public void setIdBc(int idBc) {
+        super.setId(idBc);
+    }
 
     public int getIdClient() {
         return idClient;
@@ -52,10 +67,9 @@ public final class BC extends BaseModel {
     public void setUidBc(String uidBc) {
         this.uidBc = uidBc;
     }
-
-    @Override
-    public BaseModel getInstance() {
+    
+    public static BC getBc(){
         return new BC();
     }
-
+ 
 }

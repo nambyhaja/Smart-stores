@@ -29,6 +29,15 @@ public final class StatusLivraison extends BaseModel {
         this.setDateStatus(dateStatus);
         this.setMotif(motif);
     }
+    
+    public StatusLivraison(int idStatusLivraison, int idbl, boolean status, Date dateStatus, String motif) {
+       
+        super.setId(idbl);
+        this.setIdbl(idbl);
+        this.setStatus(status);
+        this.setDateStatus(dateStatus);
+        this.setMotif(motif);
+    }
 
     public int getIdbl() {
         return idbl;
@@ -61,12 +70,9 @@ public final class StatusLivraison extends BaseModel {
     public void setMotif(String motif) {
         this.motif = motif;
     }
-
-    @Override
-    public BaseModel getInstance() {
+    
+    public static StatusLivraison getStatusLivraison(){
         return new StatusLivraison();
     }
-    
-    
 
 }

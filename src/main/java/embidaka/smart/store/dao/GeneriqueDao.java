@@ -5,6 +5,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -59,14 +60,16 @@ public class GeneriqueDao {
 
     private Class<?> getType(int type) throws Exception {
 
-        if (type == Types.VARCHAR || type == Types.CHAR) {
-            return String.class;
-        }
-        if (type == Types.INTEGER) {
-            return int.class;
-        } //if (type == Types.DATE) return java.sql.Date.class; 
-        else {
-            throw new Exception("Classe non specifier dans la base");
+        switch (type) {
+            case Types.VARCHAR:
+            case Types.CHAR:
+                return String.class;
+            case Types.INTEGER:
+                return int.class;
+            case Types.DATE:
+                return Date.class;
+            default:
+                throw new Exception("Classe non specifier dans la base");
         }
     }
 
@@ -106,9 +109,9 @@ public class GeneriqueDao {
             String sql = "INSERT INTO " + nom + "(id" + nom + "," + getListeAttribue(attribut) + ") VALUES (?," + getValue(attribut) + ");";
             conn = UtilDB.getConnection();
             stmt = conn.prepareStatement(sql);
-            int id = maxID(model,conn) + 1;
+            int id = maxID(model, conn) + 1;
             System.out.println("id = " + id);
-            stmt.setInt(1,id);
+            stmt.setInt(1, id);
             int u = 1;
             for (int i = 0; i < attribut.length; i++) {
 
@@ -119,7 +122,7 @@ public class GeneriqueDao {
             stmt.executeUpdate();
             conn.commit();
         } catch (Exception e) {
-            
+
             conn.rollback();
             throw e;
         } finally {
@@ -219,7 +222,7 @@ public class GeneriqueDao {
                 ResultSetMetaData rsmd = res.getMetaData();
                 int typeDB = 0;
                 for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                  
+
                     typeDB = rsmd.getColumnType(i);
                     Class<?> tempClass = this.getType(typeDB);
                     type.add(tempClass);
@@ -378,11 +381,14 @@ public class GeneriqueDao {
         ResultSet res = null;
         try {
 
-            String sql = "select max(id"+name+") from " + name;
+            String sql = "select max(id" + name + ") from " + name;
             stmt = conn.prepareStatement(sql);
             res = stmt.executeQuery();
+
             while (res.next()) {
-                out = (int) res.getObject("max");
+                if (res.getObject("max") != null) {
+                    out = (int) res.getObject("max");
+                }
             }
 
         } catch (Exception e) {
@@ -400,7 +406,7 @@ public class GeneriqueDao {
 //                conn.close();
 //            }
         }
-        System.out.println("ty e out eeeeeee " +out);
+        System.out.println("ty e out eeeeeee " + out);
         return out;
     }
 }

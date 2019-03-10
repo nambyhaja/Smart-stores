@@ -24,6 +24,12 @@ public final class DetailCommande extends BaseModel{
         this.setIdBc(idBc);
         this.setNombre(nombre);
     }
+    
+    public DetailCommande(int idDetailCommande, int idBc, int nombre) {
+        super.setId(idBc);
+        this.setIdBc(idBc);
+        this.setNombre(nombre);
+    }
 
     public int getIdBc() {
         return idBc;
@@ -41,10 +47,8 @@ public final class DetailCommande extends BaseModel{
         this.nombre = nombre;
     }
 
-    @Override
-    public BaseModel getInstance() {
+    public static DetailCommande getDetailCommande(){
         return new DetailCommande();
     }
-    
-    
+        
 }
