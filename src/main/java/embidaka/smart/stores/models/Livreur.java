@@ -28,6 +28,14 @@ public final class Livreur extends BaseModel{
         this.setLogin(login);
         this.setMotDePasse(motDePasse); 
     }
+    
+    public Livreur(int idLivreur, String nom, String prenom, String login, String motDePasse) {
+        super.setId(idLivreur);
+        this.setNom(nom); 
+        this.setPrenom(prenom);
+        this.setLogin(login);
+        this.setMotDePasse(motDePasse); 
+    }
 
     public String getNom() {
         return nom;
@@ -60,11 +68,10 @@ public final class Livreur extends BaseModel{
     public void setMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
     }
-
-    @Override
-    public BaseModel getInstance() {
+    
+    public static Livreur getLivreur(){
         return new Livreur();
     }
-    
-    
+
+      
 }

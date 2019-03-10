@@ -27,6 +27,14 @@ public final class Prix extends BaseModel{
         this.setPrixUnitaire(prixUnitaire); 
         this.setDatePrix(datePrix);
     }
+    
+    public Prix(int idPrix, int idProduit, double prixUnitaire, Date datePrix) {
+        
+        super.setId(idPrix);
+        this.setIdProduit(idProduit); 
+        this.setPrixUnitaire(prixUnitaire); 
+        this.setDatePrix(datePrix);
+    }
 
     public int getIdProduit() {
         return idProduit;
@@ -51,12 +59,9 @@ public final class Prix extends BaseModel{
     public void setDatePrix(Date datePrix) {
         this.datePrix = datePrix;
     }
-
-    @Override
-    public BaseModel getInstance() {
+    
+    public static Prix getPrix(){
         return new Prix();
     }
-
-    
     
 }

@@ -11,24 +11,39 @@ import embidaka.smart.store.dao.BaseModel;
  *
  * @author aramanam
  */
-public final class Client extends BaseModel{
-    
+public final class Client extends BaseModel {
+
     private String nom;
     private String prenom;
     private String login;
     private String motDePasse;
 
-    private Client() {
+    public Client() {
     }
 
     public Client(String nom, String prenom, String login, String motDePasse) {
-       
+
         this.setNom(nom);
-        this.setPrenom(prenom); 
+        this.setPrenom(prenom);
+        this.setLogin(login);
+        this.setMotDePasse(motDePasse);
+    }
+    public Client(int idClient, String nom, String prenom, String login, String motDePasse) {
+        
+        super.setId(idClient);
+        this.setNom(nom);
+        this.setPrenom(prenom);
         this.setLogin(login);
         this.setMotDePasse(motDePasse);
     }
 
+    public int getIdClient() {
+        return super.getId();
+    }
+
+    public void setIdClient(int idClient) {
+        super.setId(idClient);
+    }
 
     public String getNom() {
         return nom;
@@ -62,12 +77,8 @@ public final class Client extends BaseModel{
         this.motDePasse = motDePasse;
     }
 
-    @Override
-    public BaseModel getInstance() {
-        return new Client();
-    }
     public static Client getClient() {
         return new Client();
     }
-    
+
 }

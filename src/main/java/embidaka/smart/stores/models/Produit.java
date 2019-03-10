@@ -36,6 +36,19 @@ public final class Produit extends BaseModel {
         this.setPrix(prix);
         this.setTva(tva);
     }
+    
+    public Produit(int idProduit, Categorie categorie, String code, String designation, String description, String uid, String photo, double prix, double tva) {
+     
+        super.setId(idProduit);
+        this.setCategorie(categorie);
+        this.setCode(code);
+        this.setDesignation(designation); 
+        this.setDescription(description);
+        this.setUid(uid); 
+        this.setPhoto(photo);
+        this.setPrix(prix);
+        this.setTva(tva);
+    }
 
     public Categorie getCategorie() {
         return categorie;
@@ -100,11 +113,9 @@ public final class Produit extends BaseModel {
     public void setTva(double tva) {
         this.tva = tva;
     }
-
-    @Override
-    public BaseModel getInstance() {
+    
+    public static Produit getProduit(){
         return new Produit();
     }
-    
-    
+
 }

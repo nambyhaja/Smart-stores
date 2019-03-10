@@ -22,6 +22,10 @@ public final class Categorie extends BaseModel {
     public Categorie(String designation) {
         this.setDesignation(designation);
     }
+    public Categorie(int idCategorie,String designation) {
+        super.setId(idCategorie);
+        this.setDesignation(designation);
+    }
 
 
     public String getDesignation() {
@@ -31,9 +35,8 @@ public final class Categorie extends BaseModel {
     public void setDesignation(String designation) {
         this.designation = designation;
     }
-
-    @Override
-    public BaseModel getInstance() {
+    
+    public static Categorie getCategorie(){
         return new Categorie();
     }
 

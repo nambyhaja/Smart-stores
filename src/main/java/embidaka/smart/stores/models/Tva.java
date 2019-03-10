@@ -27,6 +27,14 @@ public final class Tva extends BaseModel{
         this.setDateApplication(dateApplication);
         this.setTaux(taux);
     }
+    
+    public Tva(int idTva, int idProduit, Date dateApplication, double taux) {
+       
+        super.setId(idTva);
+        this.setIdProduit(idProduit);
+        this.setDateApplication(dateApplication);
+        this.setTaux(taux);
+    }
 
     public int getIdProduit() {
         return idProduit;
@@ -51,10 +59,8 @@ public final class Tva extends BaseModel{
     public void setTaux(double taux) {
         this.taux = taux;
     }
-
-    @Override
-    public BaseModel getInstance() {
+    
+    public static Tva getTva(){
         return new Tva();
     }
-
 }

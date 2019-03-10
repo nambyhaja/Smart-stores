@@ -26,6 +26,14 @@ public final class Stock extends BaseModel{
         this.setNombre(nombre);
         this.setSeuil(seuil);
     }
+    
+    public Stock(int idStock,int idProduit, int nombre, int seuil) {
+       
+        super.setId(seuil);
+        this.setIdProduit(idProduit); 
+        this.setNombre(nombre);
+        this.setSeuil(seuil);
+    }
 
     public int getIdProduit() {
         return idProduit;
@@ -50,11 +58,10 @@ public final class Stock extends BaseModel{
     public void setSeuil(int seuil) {
         this.seuil = seuil;
     }
-
-    @Override
-    public BaseModel getInstance() {
+    
+    public static Stock getStock(){
         return new Stock();
     }
-    
-    
+
+ 
 }

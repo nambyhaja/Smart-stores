@@ -29,6 +29,14 @@ public final class BL extends BaseModel{
         this.setDateDebut(dateDebut);
         this.setDateFin(dateFin);
     }
+    public BL(int idBl,int idLivreur, int idFacture, Date dateDebut, Date dateFin) {
+        
+        super.setId(idBl);
+        this.setIdLivreur(idLivreur);
+        this.setIdFacture(idFacture);
+        this.setDateDebut(dateDebut);
+        this.setDateFin(dateFin);
+    }
 
     public int getIdLivreur() {
         return idLivreur;
@@ -61,11 +69,9 @@ public final class BL extends BaseModel{
     public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
     }
-
-    @Override
-    public BaseModel getInstance() {
+    
+    public static BL getBl(){
         return new BL();
     }
-    
-    
+
 }
