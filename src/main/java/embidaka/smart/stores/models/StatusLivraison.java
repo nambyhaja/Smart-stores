@@ -15,14 +15,14 @@ import java.sql.Date;
 public final class StatusLivraison extends BaseModel {
 
     private int idbl;
-    private boolean status;
+    private int status;
     private Date dateStatus;
     private String motif;
 
     private StatusLivraison() {
     }
 
-    public StatusLivraison(int idbl, boolean status, Date dateStatus, String motif) {
+    public StatusLivraison(int idbl, int status, Date dateStatus, String motif) {
        
         this.setIdbl(idbl);
         this.setStatus(status);
@@ -30,7 +30,7 @@ public final class StatusLivraison extends BaseModel {
         this.setMotif(motif);
     }
     
-    public StatusLivraison(int idStatusLivraison, int idbl, boolean status, Date dateStatus, String motif) {
+    public StatusLivraison(int idStatusLivraison, int idbl, int status, Date dateStatus, String motif) {
        
         super.setId(idbl);
         this.setIdbl(idbl);
@@ -47,11 +47,11 @@ public final class StatusLivraison extends BaseModel {
         this.idbl = idbl;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
