@@ -6,8 +6,12 @@
 package embidaka.smart.stores.service;
 
 import com.google.gson.Gson;
+import embidaka.smart.stores.dto.BaseDto;
+import embidaka.smart.stores.models.Categorie;
 import embidaka.smart.stores.models.Livreur;
 import embidaka.smart.stores.models.Produit;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -29,6 +33,28 @@ public class ProductService
             Livreur  lv = new Livreur("nom", "prenom", "login", "mdp");
         Gson gson = new Gson();
         String jsonInString = gson.toJson(lv);
+            return Response.status(200).entity(jsonInString).build();
+
+    }
+    
+    @GET
+    @Produces({"application/json"})
+    @Path("/")
+    public Response getAllProducts() 
+    {
+        List<Produit> listProduit = new ArrayList<>();
+        Categorie categ = new Categorie(1, "Categ TEST");
+        
+        listProduit.add(new Produit(1, categ, "code1", "produit 1", "descr produit 1", "UID1234", "http://img.com/image1.jpg", 2000, 20.2));
+        listProduit.add(new Produit(2, categ, "code2", "produit 2", "descr produit 2", "UID1234", "http://img.com/image2.jpg", 3000, 20.2));    
+        listProduit.add(new Produit(3, categ, "code3", "produit 3", "descr produit 3", "UID1234", "http://img.com/image3.jpg", 4000, 20.2));
+        
+        
+        BaseDto dto = new BaseDto();
+        dto.setStatusAsSuccess();
+        dto.setData(listProduit);
+        Gson gson = new Gson();
+        String jsonInString = gson.toJson(dto);
             return Response.status(200).entity(jsonInString).build();
 
     }

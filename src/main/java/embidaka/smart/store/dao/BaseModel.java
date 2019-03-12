@@ -1,8 +1,7 @@
 package embidaka.smart.store.dao;
 
-import embidaka.smart.stores.dto.BaseDto;
 
-public class BaseModel extends BaseDto{
+public class BaseModel{
 
     private int id;
 

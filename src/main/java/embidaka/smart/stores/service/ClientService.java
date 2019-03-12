@@ -41,7 +41,7 @@ public class ClientService {
             client.setStatusAsError();
             client.setStatus(401);
             client.setMessage("Login ou mot de passe invalide");
-            client.setDescription("Login ou mot de passe invalide");
+            client.setDescriptionMessage("Login ou mot de passe invalide");
             jsonInString = gson.toJson(client);
         }
         

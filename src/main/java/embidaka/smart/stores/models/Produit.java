@@ -50,6 +50,14 @@ public final class Produit extends BaseModel {
         this.setTva(tva);
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Categorie getCategorie() {
         return categorie;
     }
@@ -72,14 +80,6 @@ public final class Produit extends BaseModel {
 
     public void setDesignation(String designation) {
         this.designation = designation;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getUid() {

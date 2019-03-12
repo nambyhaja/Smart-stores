@@ -13,18 +13,20 @@ public class BaseDto {
     private int status;
     private boolean success;
     private String message;
-    private String description;
+    private String descriptionMessage;
+    private Object data;
 
     public BaseDto()
     {
         
     }
     
-    public BaseDto(int status, boolean success, String message, String description) {
+    public BaseDto(int status, boolean success, String message, String descriptionMessage, Object data) {
         this.status = status;
         this.success = success;
         this.message = message;
-        this.description = description;
+        this.descriptionMessage = descriptionMessage;
+        this.data = data;
     }
 
     public int getStatus() {
@@ -51,12 +53,12 @@ public class BaseDto {
         this.message = message;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptionMessage() {
+        return descriptionMessage;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescriptionMessage(String descriptionMessage) {
+        this.descriptionMessage = descriptionMessage;
     }
 
     public void setStatusAsSuccess()
@@ -64,7 +66,7 @@ public class BaseDto {
         this.setStatus(200);
         this.setSuccess(true);
         this.setMessage("success");
-        this.setDescription("success");
+        this.setDescriptionMessage("success");
     }
     
     public void setStatusAsError()
@@ -72,6 +74,14 @@ public class BaseDto {
         this.setStatus(400);
         this.setSuccess(false);
         this.setMessage("error");
-        this.setDescription("error");
+        this.setDescriptionMessage("error");
+    }
+    
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
     }
 }
