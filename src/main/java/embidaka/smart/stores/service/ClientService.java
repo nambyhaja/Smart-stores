@@ -6,6 +6,7 @@
 package embidaka.smart.stores.service;
 
 import com.google.gson.Gson;
+import embidaka.smart.stores.dto.BaseDto;
 import embidaka.smart.stores.models.Client;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -30,21 +31,24 @@ public class ClientService {
         Gson gson = new Gson();
         String jsonInString = "";
         
+        BaseDto result = new BaseDto();
+        result.setData(null);
+        
         Client client = gson.fromJson(p, Client.class);
         if(client != null && client.getLogin().equals("admin") && client.getMotDePasse().equals("admin"))
         {
-            client.setStatusAsSuccess();
-            jsonInString = gson.toJson(client);
+            result.setStatusAsSuccess();
+            result.setData(client);
         }
         else
         {
-            client.setStatusAsError();
-            client.setStatus(401);
-            client.setMessage("Login ou mot de passe invalide");
-            client.setDescriptionMessage("Login ou mot de passe invalide");
-            jsonInString = gson.toJson(client);
+            result.setStatusAsError();
+            result.setStatus(401);
+            result.setMessage("Login ou mot de passe invalide");
+            result.setDescriptionMessage("Login ou mot de passe invalide");
         }
         
+        jsonInString = gson.toJson(result);
         return Response.status(200).entity(jsonInString).build();
     }
 }
