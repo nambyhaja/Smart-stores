@@ -18,6 +18,9 @@ public final class Client extends BaseModel {
     private String prenom;
     private String login;
     private String motDePasse;
+    
+    //AZA IASANA SAINA FA ILAY ID AO @ BASE MODEL IHANY NO IZY
+    private int idClient = -1;
 
     public Client() {
     }
@@ -37,13 +40,17 @@ public final class Client extends BaseModel {
         this.setLogin(login);
         this.setMotDePasse(motDePasse);
     }
+    
+    
 
     public int getIdClient() {
+        if(this.idClient > 0) return this.idClient;
         return super.getId();
     }
 
     public void setIdClient(int idClient) {
         super.setId(idClient);
+        this.idClient = idClient;
     }
 
     public String getNom() {
