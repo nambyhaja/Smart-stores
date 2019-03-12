@@ -358,7 +358,7 @@ public class GeneriqueDao {
         return null;
     }
 
-    public BaseModel findId(BaseModel classType, boolean cascade) throws Exception {
+    /*public BaseModel findId(BaseModel classType, boolean cascade) throws Exception {
 
         List<BaseModel> liste = findAll(classType, true);
         int nb = liste.size();
@@ -369,7 +369,7 @@ public class GeneriqueDao {
             }
         }
         return null;
-    }
+    }*/
 
     public int maxID(BaseModel classType, Connection conn) throws Exception {
 
@@ -411,13 +411,13 @@ public class GeneriqueDao {
     }
     
     @SuppressWarnings("rawtypes")
-    private ArrayList<BaseModel> findByString(Class<?> mere, Class<?> fille, String where, int id) throws Exception {
+    public ArrayList<BaseModel> findByString(Class<?> fille, String where) throws Exception {
 
         ArrayList<BaseModel> reponse = new ArrayList<>();
         String name = fille.getSimpleName();
         String allName = fille.getName();
 
-        String nameMere = mere.getSimpleName();
+        //String nameMere = mere.getSimpleName();
 
         Class<?> model = Class.forName(allName);
 
@@ -426,7 +426,7 @@ public class GeneriqueDao {
         ResultSet res = null;
         try {
 
-            String sql = "select * from " + name + " where " + where + " = " + id;
+            String sql = "select * from " + name + " where " + where;
             conn = UtilDB.getConnection();
             stmt = conn.prepareStatement(sql);
             res = stmt.executeQuery();
