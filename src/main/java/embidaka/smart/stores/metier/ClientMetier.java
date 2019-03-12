@@ -20,7 +20,25 @@ public class ClientMetier
     public static Client login(String login, String motDePasse) throws Exception
     {
         Client result = null;
-        ArrayList<BaseModel> val =  new GeneriqueDao().findByString(Client.class, " login = '" + login + "' AND motdepasse = '" +  motDePasse +"'");
+        ArrayList<BaseModel> val =  new GeneriqueDao().findByString(Client.class, " login = '" + login + "' AND motdepasse = '" + UtilServices.hashing(motDePasse) +"'");
+        if(val!=null && val.size()>0)
+        {
+            result = (Client) val.get(0);
+        }
+        else
+        {
+            throw new Exception("Login et mot de passe invalide");
+        }
+        return result;
+    }
+    
+    public static Client inscription(String nom, String prenom, String login, String motDePasse) throws Exception
+    {
+        Client client = new Client(nom, prenom, login, UtilServices.hashing(motDePasse));
+        new GeneriqueDao().save(client);
+        
+        Client result = null;
+        ArrayList<BaseModel> val =  new GeneriqueDao().findByString(Client.class, " login = '" + login + "' AND motdepasse = '" + UtilServices.hashing(motDePasse) +"'");
         if(val!=null && val.size()>0)
         {
             result = (Client) val.get(0);

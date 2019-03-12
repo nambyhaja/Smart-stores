@@ -57,4 +57,38 @@ public class ClientService {
         String jsonInString = gson.toJson(result);
         return Response.status(200).entity(jsonInString).build();
     }
+    
+    @POST
+    @Path("/inscription")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response inscription(String p) {
+        Gson gson = new Gson();
+        BaseDto result = new BaseDto();
+        result.setData(null);
+        Client client = gson.fromJson(p, Client.class);
+        try
+        {
+            if(client != null)
+            {
+                client = ClientMetier.inscription(client.getNom(), client.getPrenom(), client.getLogin(), client.getMotDePasse());
+                result.setStatusAsSuccess();
+                result.setData(client);
+            }
+            else
+            {
+                result.setStatusAsError();
+                result.setStatus(401);
+                result.setMessage("Crédential invalide");
+                result.setDescriptionMessage("Crédential invalide");
+            }
+        } catch(Exception exc) {
+            result.setStatusAsError();
+            result.setStatus(401);
+            result.setMessage(exc.getMessage());
+            result.setDescriptionMessage(exc.getMessage());
+        }
+        String jsonInString = gson.toJson(result);
+        return Response.status(200).entity(jsonInString).build();
+    }
 }
