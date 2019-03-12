@@ -16,7 +16,7 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE statuslivraison
-  OWNER TO postgres;
+  OWNER TO pfocsurjevcpgi;
 
 -- Index: assoc_bl_statuslivraison_fk
 
