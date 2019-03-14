@@ -27,4 +27,21 @@ public class ProduitMetier {
         });
         return result;
     }
+    
+    public static Produit infoProduitByUid(String uid) throws Exception
+    {
+        Produit result = null;
+        List<BaseModel> val =  new GeneriqueDao().findByString(Produit.class, " uid = '"+uid+"'");
+        if(val != null && !val.isEmpty())
+        {
+            result = (Produit) val.get(0);
+        }
+        return result;
+    }
+    
+    public static Produit infoProduitById(int id) throws Exception
+    {
+        Produit result = (Produit) new GeneriqueDao().findId(id, Produit.getProduit());
+        return result;
+    }
 }

@@ -43,41 +43,70 @@ public class ProductService
     
     @GET
     @Produces({"application/json"})
-    @Path("/{param}")
-    public Response getInfoProduct(@PathParam("param") String uid) 
+    @Path("/uid/{param}")
+    public Response getInfoProductByUID(@PathParam("param") String uid) 
     {
         BaseDto dtoResult = new BaseDto();
         dtoResult.setData(null);
         
-        List<Produit> listProduit = new ArrayList<>();
-        Categorie categ = new Categorie(1, "Categ TEST");
-        listProduit.add(new Produit(1, 1, "code1", "produit 1", "descr produit 1", "UID123", "http://img.com/image1.jpg", 2000, 20.2));
-        listProduit.add(new Produit(2, 1, "code2", "produit 2", "descr produit 2", "UID456", "http://img.com/image2.jpg", 3000, 20.2));    
-        listProduit.add(new Produit(3, 1, "code3", "produit 3", "descr produit 3", "UID789", "http://img.com/image3.jpg", 4000, 20.2));
-        
-        
-        for (Produit produit : listProduit) 
+        try 
         {
-            if(produit.getUid().equals(uid))
+            Produit produit = ProduitMetier.infoProduitByUid(uid);
+            if(produit != null)
             {
                 dtoResult.setStatusAsSuccess();
                 dtoResult.setData(produit);
-                break;
             }
-        }
-        if(dtoResult.getData() == null)
-        {
+            else
+            {
+                dtoResult.setStatusAsError();
+                dtoResult.setStatus(200);
+                dtoResult.setMessage("Produit introuvable");
+                dtoResult.setDescriptionMessage("Produit introuvable");
+            }
+        } catch (Exception exc) {
             dtoResult.setStatusAsError();
-            dtoResult.setStatus(200);
-            dtoResult.setMessage("Produit introuvable");
-            dtoResult.setDescriptionMessage("Produit introuvable");
+            dtoResult.setStatus(401);
+            dtoResult.setMessage(exc.getMessage());
+            dtoResult.setDescriptionMessage(exc.getMessage());
         }
-        
-       
         Gson gson = new Gson();
         String jsonInString = gson.toJson(dtoResult);
             return Response.status(200).entity(jsonInString).build();
-
+    }
+    
+    @GET
+    @Produces({"application/json"})
+    @Path("/id/{param}")
+    public Response getInfoProductById(@PathParam("param") String id) 
+    {
+        BaseDto dtoResult = new BaseDto();
+        dtoResult.setData(null);
+        
+        try 
+        {
+            Produit produit = ProduitMetier.infoProduitById(Integer.parseInt(id));
+            if(produit != null)
+            {
+                dtoResult.setStatusAsSuccess();
+                dtoResult.setData(produit);
+            }
+            else
+            {
+                dtoResult.setStatusAsError();
+                dtoResult.setStatus(200);
+                dtoResult.setMessage("Produit introuvable");
+                dtoResult.setDescriptionMessage("Produit introuvable");
+            }
+        } catch (Exception exc) {
+            dtoResult.setStatusAsError();
+            dtoResult.setStatus(401);
+            dtoResult.setMessage(exc.getMessage());
+            dtoResult.setDescriptionMessage(exc.getMessage());
+        }
+        Gson gson = new Gson();
+        String jsonInString = gson.toJson(dtoResult);
+            return Response.status(200).entity(jsonInString).build();
     }
     
     @GET
@@ -98,14 +127,6 @@ public class ProductService
             dtoResult.setMessage(exc.getMessage());
             dtoResult.setDescriptionMessage(exc.getMessage());
         }
-        //Categorie categ = new Categorie(1, "Categ TEST");
-        
-        
-        
-        /*listProduit.add(new Produit(1, 1, "code1", "produit 1", "descr produit 1", "UID123", "http://img.com/image1.jpg", 2000, 20.2));
-        listProduit.add(new Produit(2, 1, "code2", "produit 2", "descr produit 2", "UID456", "http://img.com/image2.jpg", 3000, 20.2));    
-        listProduit.add(new Produit(3, 1, "code3", "produit 3", "descr produit 3", "UID789", "http://img.com/image3.jpg", 4000, 20.2));
-        */
         dtoResult.setStatusAsSuccess();
         dtoResult.setData(listProduit);
        
