@@ -42,8 +42,6 @@ public final class Produit extends BaseModel {
     public Produit(int idProduit, int idCategorie, String code, String designation, String description, String uid, String photo, double prix, double tva) {
      
         this.setIdProduit(idProduit);
-        this.setCategorie(categorie);
-        super.setId(idProduit);
         this.setIdCategorie(idCategorie);
         this.setCode(code);
         this.setDesignation(designation); 
@@ -56,8 +54,11 @@ public final class Produit extends BaseModel {
 
     public int getidCategorie() {
         return idCategorie;
+    }
     public int getIdProduit() {
-        if(this.idProduit > 0) return this.idProduit;
+        if(this.idProduit > 0) {
+            return this.idProduit;
+        }
         return super.getId();
     }
 
@@ -74,15 +75,8 @@ public final class Produit extends BaseModel {
         this.description = description;
     }
 
-    public Categorie getCategorie() {
-        return categorie;
-    }
-
     public void setIdCategorie(int idCategorie) {
         this.idCategorie = idCategorie;
-    
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
     }
 
     public String getCode() {
