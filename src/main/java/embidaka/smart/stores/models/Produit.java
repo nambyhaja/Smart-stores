@@ -6,6 +6,7 @@
 package embidaka.smart.stores.models;
 
 import embidaka.smart.store.dao.BaseModel;
+import java.math.BigDecimal;
 
 /**
  *
@@ -50,6 +51,19 @@ public final class Produit extends BaseModel {
         this.setPhoto(photo);
         this.setPrix(prix);
         this.setTva(tva);
+    }
+    
+    public Produit(int idProduit, int idCategorie, String code, String designation, String description, String uid, String photo, BigDecimal prix, BigDecimal tva) {
+     
+        this.setIdProduit(idProduit);
+        this.setIdCategorie(idCategorie);
+        this.setCode(code);
+        this.setDesignation(designation); 
+        this.setDescription(description);
+        this.setUid(uid); 
+        this.setPhoto(photo);
+        this.setPrix(prix.doubleValue());
+        this.setTva(tva.doubleValue());
     }
 
     public int getidCategorie() {

@@ -4,6 +4,7 @@ import embidaka.smart.stores.database.UtilDB;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -68,6 +69,8 @@ public class GeneriqueDao {
                 return int.class;
             case Types.DATE:
                 return Date.class;
+            case Types.NUMERIC:
+                return BigDecimal.class;
             default:
                 throw new Exception("Classe non specifier dans la base");
         }

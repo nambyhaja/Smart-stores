@@ -7,11 +7,14 @@ package embidaka.smart.stores.service;
 
 import com.google.gson.Gson;
 import embidaka.smart.stores.dto.BaseDto;
+import embidaka.smart.stores.metier.ProduitMetier;
 import embidaka.smart.stores.models.Categorie;
 import embidaka.smart.stores.models.Livreur;
 import embidaka.smart.stores.models.Produit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -48,9 +51,9 @@ public class ProductService
         
         List<Produit> listProduit = new ArrayList<>();
         Categorie categ = new Categorie(1, "Categ TEST");
-        listProduit.add(new Produit(1, categ, "code1", "produit 1", "descr produit 1", "UID123", "http://img.com/image1.jpg", 2000, 20.2));
-        listProduit.add(new Produit(2, categ, "code2", "produit 2", "descr produit 2", "UID456", "http://img.com/image2.jpg", 3000, 20.2));    
-        listProduit.add(new Produit(3, categ, "code3", "produit 3", "descr produit 3", "UID789", "http://img.com/image3.jpg", 4000, 20.2));
+        listProduit.add(new Produit(1, 1, "code1", "produit 1", "descr produit 1", "UID123", "http://img.com/image1.jpg", 2000, 20.2));
+        listProduit.add(new Produit(2, 1, "code2", "produit 2", "descr produit 2", "UID456", "http://img.com/image2.jpg", 3000, 20.2));    
+        listProduit.add(new Produit(3, 1, "code3", "produit 3", "descr produit 3", "UID789", "http://img.com/image3.jpg", 4000, 20.2));
         
         
         for (Produit produit : listProduit) 
@@ -86,11 +89,23 @@ public class ProductService
         dtoResult.setData(null);
         
         List<Produit> listProduit = new ArrayList<>();
-        Categorie categ = new Categorie(1, "Categ TEST");
-        listProduit.add(new Produit(1, categ, "code1", "produit 1", "descr produit 1", "UID123", "http://img.com/image1.jpg", 2000, 20.2));
-        listProduit.add(new Produit(2, categ, "code2", "produit 2", "descr produit 2", "UID456", "http://img.com/image2.jpg", 3000, 20.2));    
-        listProduit.add(new Produit(3, categ, "code3", "produit 3", "descr produit 3", "UID789", "http://img.com/image3.jpg", 4000, 20.2));
+        try {
+            listProduit = ProduitMetier.toutLesProduits();
+            dtoResult.setStatusAsSuccess();
+        } catch (Exception exc) {
+            dtoResult.setStatusAsError();
+            dtoResult.setStatus(401);
+            dtoResult.setMessage(exc.getMessage());
+            dtoResult.setDescriptionMessage(exc.getMessage());
+        }
+        //Categorie categ = new Categorie(1, "Categ TEST");
         
+        
+        
+        /*listProduit.add(new Produit(1, 1, "code1", "produit 1", "descr produit 1", "UID123", "http://img.com/image1.jpg", 2000, 20.2));
+        listProduit.add(new Produit(2, 1, "code2", "produit 2", "descr produit 2", "UID456", "http://img.com/image2.jpg", 3000, 20.2));    
+        listProduit.add(new Produit(3, 1, "code3", "produit 3", "descr produit 3", "UID789", "http://img.com/image3.jpg", 4000, 20.2));
+        */
         dtoResult.setStatusAsSuccess();
         dtoResult.setData(listProduit);
        
