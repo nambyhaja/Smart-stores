@@ -13,7 +13,7 @@ import embidaka.smart.store.dao.BaseModel;
  */
 public final class Produit extends BaseModel {
  
-    private Categorie categorie;
+    private int idCategorie;
     private String code;
     private String designation;
     private String description;
@@ -25,9 +25,9 @@ public final class Produit extends BaseModel {
     private Produit() {
     }
 
-    public Produit(Categorie categorie, String code, String designation, String description, String uid, String photo, double prix, double tva) {
+    public Produit(int idCategorie, String code, String designation, String description, String uid, String photo, double prix, double tva) {
      
-        this.setCategorie(categorie);
+        this.setIdCategorie(idCategorie);
         this.setCode(code);
         this.setDesignation(designation); 
         this.setDescription(description);
@@ -37,10 +37,10 @@ public final class Produit extends BaseModel {
         this.setTva(tva);
     }
     
-    public Produit(int idProduit, Categorie categorie, String code, String designation, String description, String uid, String photo, double prix, double tva) {
+    public Produit(int idProduit, int idCategorie, String code, String designation, String description, String uid, String photo, double prix, double tva) {
      
         super.setId(idProduit);
-        this.setCategorie(categorie);
+        this.setIdCategorie(idCategorie);
         this.setCode(code);
         this.setDesignation(designation); 
         this.setDescription(description);
@@ -50,12 +50,12 @@ public final class Produit extends BaseModel {
         this.setTva(tva);
     }
 
-    public Categorie getCategorie() {
-        return categorie;
+    public int getidCategorie() {
+        return idCategorie;
     }
 
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
+    public void setIdCategorie(int idCategorie) {
+        this.idCategorie = idCategorie;
     }
 
     public String getCode() {
