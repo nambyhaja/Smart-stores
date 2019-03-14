@@ -13,9 +13,11 @@ import embidaka.smart.store.dao.BaseModel;
  */
 public class ProduitPanier extends BaseModel{
            
-           private int idPanier;
-           private int idProduit;
-           private int quantite;
+    private int idPanier;
+    private int idProduit;
+    private int quantite;
+    
+    private int idProduitPanier = -1;
 
     private ProduitPanier() {
     }
@@ -28,11 +30,23 @@ public class ProduitPanier extends BaseModel{
     
     public ProduitPanier(int idProduitPanier, int idPanier, int idProduit, int quantite) {
         
-        super.setId(idPanier);
+        this.setIdProduitPanier(idProduitPanier);
         this.idPanier = idPanier;
         this.idProduit = idProduit;
         this.quantite = quantite;
     }
+
+    public int getIdProduitPanier() {
+        if(this.idProduitPanier > 0) return this.idProduitPanier;
+        return super.getId();
+    }
+
+    public void setIdProduitPanier(int idProduitPanier) {
+        super.setId(idProduitPanier);
+        this.idProduitPanier = idProduitPanier;
+    }
+    
+    
 
     public int getIdPanier() {
         return idPanier;

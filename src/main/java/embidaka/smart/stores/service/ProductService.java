@@ -6,7 +6,12 @@
 package embidaka.smart.stores.service;
 
 import com.google.gson.Gson;
+import embidaka.smart.stores.dto.BaseDto;
+import embidaka.smart.stores.models.Categorie;
 import embidaka.smart.stores.models.Livreur;
+import embidaka.smart.stores.models.Produit;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -20,7 +25,7 @@ import javax.ws.rs.core.Response;
 @Path("/produits")
 public class ProductService 
 {
-    @GET
+    /*@GET
     @Produces({"application/json"})
     @Path("/{param}")
     public Response getMsg(@PathParam("param") String msg) 
@@ -31,15 +36,68 @@ public class ProductService
             return Response.status(200).entity(jsonInString).build();
 
     }
-
-    @POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Path("/inscription")
-    public Response inscription(Livreur livreur) 
+    */
+    
+    @GET
+    @Produces({"application/json"})
+    @Path("/{param}")
+    public Response getInfoProduct(@PathParam("param") String uid) 
     {
+        BaseDto dtoResult = new BaseDto();
+        dtoResult.setData(null);
+        
+        List<Produit> listProduit = new ArrayList<>();
+        Categorie categ = new Categorie(1, "Categ TEST");
+        listProduit.add(new Produit(1, categ, "code1", "produit 1", "descr produit 1", "UID123", "http://img.com/image1.jpg", 2000, 20.2));
+        listProduit.add(new Produit(2, categ, "code2", "produit 2", "descr produit 2", "UID456", "http://img.com/image2.jpg", 3000, 20.2));    
+        listProduit.add(new Produit(3, categ, "code3", "produit 3", "descr produit 3", "UID789", "http://img.com/image3.jpg", 4000, 20.2));
+        
+        
+        for (Produit produit : listProduit) 
+        {
+            if(produit.getUid().equals(uid))
+            {
+                dtoResult.setStatusAsSuccess();
+                dtoResult.setData(produit);
+                break;
+            }
+        }
+        if(dtoResult.getData() == null)
+        {
+            dtoResult.setStatusAsError();
+            dtoResult.setStatus(200);
+            dtoResult.setMessage("Produit introuvable");
+            dtoResult.setDescriptionMessage("Produit introuvable");
+        }
+        
+       
         Gson gson = new Gson();
-        String jsonInString = gson.toJson(livreur);
-        return Response.status(200).entity(jsonInString).build();
+        String jsonInString = gson.toJson(dtoResult);
+            return Response.status(200).entity(jsonInString).build();
+
     }
+    
+    @GET
+    @Produces({"application/json"})
+    @Path("/")
+    public Response getProducts() 
+    {
+        BaseDto dtoResult = new BaseDto();
+        dtoResult.setData(null);
+        
+        List<Produit> listProduit = new ArrayList<>();
+        Categorie categ = new Categorie(1, "Categ TEST");
+        listProduit.add(new Produit(1, categ, "code1", "produit 1", "descr produit 1", "UID123", "http://img.com/image1.jpg", 2000, 20.2));
+        listProduit.add(new Produit(2, categ, "code2", "produit 2", "descr produit 2", "UID456", "http://img.com/image2.jpg", 3000, 20.2));    
+        listProduit.add(new Produit(3, categ, "code3", "produit 3", "descr produit 3", "UID789", "http://img.com/image3.jpg", 4000, 20.2));
+        
+        dtoResult.setStatusAsSuccess();
+        dtoResult.setData(listProduit);
+       
+        Gson gson = new Gson();
+        String jsonInString = gson.toJson(dtoResult);
+            return Response.status(200).entity(jsonInString).build();
+
+    }
+    
 }

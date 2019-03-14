@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -21,6 +21,8 @@ public final class Produit extends BaseModel {
     private String photo;
     private double prix;
     private double tva;
+    
+    private int idProduit = -1;
 
     private Produit() {
     }
@@ -39,6 +41,8 @@ public final class Produit extends BaseModel {
     
     public Produit(int idProduit, int idCategorie, String code, String designation, String description, String uid, String photo, double prix, double tva) {
      
+        this.setIdProduit(idProduit);
+        this.setCategorie(categorie);
         super.setId(idProduit);
         this.setIdCategorie(idCategorie);
         this.setCode(code);
@@ -52,10 +56,33 @@ public final class Produit extends BaseModel {
 
     public int getidCategorie() {
         return idCategorie;
+    public int getIdProduit() {
+        if(this.idProduit > 0) return this.idProduit;
+        return super.getId();
+    }
+
+    public void setIdProduit(int idProduit) {
+        super.setId(idProduit);
+        this.idProduit = idProduit;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
     }
 
     public void setIdCategorie(int idCategorie) {
         this.idCategorie = idCategorie;
+    
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
     }
 
     public String getCode() {
@@ -72,14 +99,6 @@ public final class Produit extends BaseModel {
 
     public void setDesignation(String designation) {
         this.designation = designation;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getUid() {

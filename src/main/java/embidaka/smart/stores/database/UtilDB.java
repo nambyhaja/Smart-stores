@@ -39,6 +39,10 @@ public final class UtilDB
             props.setProperty("ssl", UtilDB.SSL);
             props.setProperty("sslfactory", UtilDB.SSLFACTORY);
             connexion = DriverManager.getConnection(url, props);
+            if(connexion != null)
+            {
+                connexion.setAutoCommit(false);
+            }
         }
         return connexion;
     }

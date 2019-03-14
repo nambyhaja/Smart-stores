@@ -1,6 +1,7 @@
 package embidaka.smart.store.dao;
 
-public class BaseModel {
+
+public class BaseModel{
 
     private int id;
 

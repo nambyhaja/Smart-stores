@@ -18,6 +18,8 @@ public final class BC extends BaseModel {
     private Date DateCommande;
     private String uidBc;
 
+    private int idBC = -1;
+    
     private BC() {
     }
 
@@ -30,18 +32,20 @@ public final class BC extends BaseModel {
     
     public BC(int id, int idClient, Date DateCommande, String uidBc) {
         
-        super.setId(id);
+        this.setIdBc(id);
         this.setIdClient(idClient);
         this.setDateCommande(DateCommande);
         this.setUidBc(uidBc);
     }
 
     public int getIdBc() {
+        if(this.idBC > 0) return this.idBC;
         return super.getId();
     }
 
     public void setIdBc(int idBc) {
         super.setId(idBc);
+        this.idBC = idBc;
     }
 
     public int getIdClient() {
