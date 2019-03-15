@@ -6,6 +6,7 @@
 package embidaka.smart.stores.models;
 
 import embidaka.smart.store.dao.BaseModel;
+import embidaka.smart.store.dao.GeneriqueDao;
 import java.math.BigDecimal;
 
 /**
@@ -13,6 +14,8 @@ import java.math.BigDecimal;
  * @author nambi
  */
 public final class Produit extends BaseModel {
+    
+    private Categorie categorie;
  
     private int idCategorie;
     private String code;
@@ -28,7 +31,7 @@ public final class Produit extends BaseModel {
     private Produit() {
     }
 
-    public Produit(int idCategorie, String code, String designation, String description, String uid, String photo, double prix, double tva) {
+    public Produit(int idCategorie, String code, String designation, String description, String uid, String photo, double prix, double tva) throws Exception {
      
         this.setIdCategorie(idCategorie);
         this.setCode(code);
@@ -40,7 +43,7 @@ public final class Produit extends BaseModel {
         this.setTva(tva);
     }
     
-    public Produit(int idProduit, int idCategorie, String code, String designation, String description, String uid, String photo, double prix, double tva) {
+    public Produit(int idProduit, int idCategorie, String code, String designation, String description, String uid, String photo, double prix, double tva) throws Exception {
      
         this.setIdProduit(idProduit);
         this.setIdCategorie(idCategorie);
@@ -53,7 +56,7 @@ public final class Produit extends BaseModel {
         this.setTva(tva);
     }
     
-    public Produit(int idProduit, int idCategorie, String code, String designation, String description, String uid, String photo, BigDecimal prix, BigDecimal tva) {
+    public Produit(int idProduit, int idCategorie, String code, String designation, String description, String uid, String photo, BigDecimal prix, BigDecimal tva) throws Exception {
      
         this.setIdProduit(idProduit);
         this.setIdCategorie(idCategorie);
@@ -89,8 +92,10 @@ public final class Produit extends BaseModel {
         this.description = description;
     }
 
-    public void setIdCategorie(int idCategorie) {
+    public void setIdCategorie(int idCategorie) throws Exception {
+        
         this.idCategorie = idCategorie;
+        this.categorie =(Categorie) new GeneriqueDao().findId(idCategorie, Categorie.getCategorie());
     }
 
     public String getCode() {
