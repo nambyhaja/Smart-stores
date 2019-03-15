@@ -96,6 +96,10 @@ public final class Produit extends BaseModel {
         
         this.idCategorie = idCategorie;
         this.categorie =(Categorie) new GeneriqueDao().findId(idCategorie, Categorie.getCategorie());
+        if(categorie == null)
+        {
+            throw new Exception("La categorie associée avec ce Produit n'existe pas");
+        }
     }
 
     public String getCode() {
