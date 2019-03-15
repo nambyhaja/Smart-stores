@@ -7,9 +7,9 @@ package embidaka.smart.stores.service;
 
 import com.google.gson.Gson;
 import embidaka.smart.stores.dto.BaseDto;
-import embidaka.smart.stores.metier.ClientMetier;
+import embidaka.smart.stores.metier.LivreurMetier;
 import embidaka.smart.stores.metier.VendeurMetier;
-import embidaka.smart.stores.models.Client;
+import embidaka.smart.stores.models.Livreur;
 import embidaka.smart.stores.models.Vendeur;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -23,9 +23,9 @@ import javax.ws.rs.core.Response;
  * @author hjhonata
  */
 
-@Path("/vendeurs")
-public class VendeurService 
-{
+@Path("/livreurs")
+public class LivreurService {
+    //Example POST
     @POST
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -34,14 +34,14 @@ public class VendeurService
         Gson gson = new Gson();
         BaseDto result = new BaseDto();
         result.setData(null);
-        Vendeur vendeur = gson.fromJson(p, Vendeur.class);
+        Livreur livreur = gson.fromJson(p, Livreur.class);
         try
         {
-            if(vendeur != null)
+            if(livreur != null)
             {
-                vendeur = VendeurMetier.login(vendeur.getLogin(), vendeur.getMotDePasse());
+                livreur =  LivreurMetier.login(livreur.getLogin(), livreur.getMotDePasse());
                 result.setStatusAsSuccess();
-                result.setData(vendeur);
+                result.setData(livreur);
             }
             else
             {

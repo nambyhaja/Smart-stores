@@ -15,18 +15,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author nambi
  */
-@XmlRootElement(name = "livreur")
 public final class Livreur extends BaseModel{
-    @JsonProperty("nom")
+    
+    private int idLLivreur;
     private String nom;
-    
-    @JsonProperty("prenom")
     private String prenom;
-    
-    @JsonProperty("login")
     private String login;
-    
-    @JsonProperty("motDePasse")
     private String motDePasse;
 
     private Livreur() {
@@ -48,6 +42,18 @@ public final class Livreur extends BaseModel{
         this.setMotDePasse(motDePasse); 
     }
 
+    public int getIdLLivreur() {
+        if(this.idLLivreur > 0) return this.idLLivreur;
+        return super.getId();
+    }
+
+    public void setIdLLivreur(int idLLivreur) {
+        this.idLLivreur = idLLivreur;
+        super.setId(idLLivreur);
+    }
+    
+    
+
     public String getNom() {
         return nom;
     }
@@ -56,8 +62,6 @@ public final class Livreur extends BaseModel{
         this.nom = nom;
     }
     
-    @Basic
-    @Column(name = "prenom")
     public String getPrenom() {
         return prenom;
     }
@@ -66,8 +70,6 @@ public final class Livreur extends BaseModel{
         this.prenom = prenom;
     }
 
-    @Basic
-    @Column(name = "login")
     public String getLogin() {
         return login;
     }
@@ -76,8 +78,6 @@ public final class Livreur extends BaseModel{
         this.login = login;
     }
 
-    @Basic
-    @Column(name = "motDePasse")
     public String getMotDePasse() {
         return motDePasse;
     }
